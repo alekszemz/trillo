@@ -18,7 +18,25 @@
             <img src="img/logo.png" alt="Trillo logo" class="logo">
 
             <form action="#" class="search">
-                <input type="text" class="search__input" placeholder="Search hotels">
+
+                <input type="text" class="search__input" placeholder="Search hotels" list="datalist1">
+                <!-- In real this list should be replaced by database -->
+                <datalist id="datalist1">
+                    <option value="France"></option>
+                    <option value="Spain"></option>
+                    <option value="United States"></option>
+                    <option value="China"></option>
+                    <option value="Italy"></option>
+                    <option value="Turkey"></option>
+                    <option value="Mexico"></option>
+                    <option value="Germany"></option>
+                    <option value="Russia"></option>
+                    <option value="Greece"></option>
+                    <option value="New Zeland"></option>
+                    <option value="Portugal"></option>
+                    <option value="United Kingdom"></option>
+                </datalist>
+
                 <button class="search__button">
                     <svg class="search__icon">
                         <use xlink:href="img/sprite.svg#icon-magnifying-glass"></use>
@@ -36,10 +54,19 @@
 
                 <div class="user-nav__icon-box">
                     <svg class="user-nav__icon">
-                        <use xlink:href="img/sprite.svg#icon-chat"></use>
+                        <use xlink:href="img/sprite.svg#icon-chat"></use> 
                     </svg>
                     <span class="user-nav__notification">13</span>
+                    <span class="chat-box">
+                        <ul class="phrazes">
+                            <li class="phraze-one">Hello!</li>
+                            <li class="phraze-two">How are you?</li>
+                            <li class="phraze-three">I'm good thanks.</li>
+                            <li class="phraze-four">Good see you soon!</li>
+                        </ul> 
+                    </span>
                 </div>
+
                 <div class="user-nav__user">
                     <img src="img/user.jpg" alt="User photo" class="user-nav__user-photo">
                     <span class="user-nav__user-name">Jonas</span>
@@ -93,17 +120,33 @@
 
             <main class="hotel-view">
                 <div class="gallery">
-                    <figure class="gallery__item">
-                        <img src="img/hotel-1.jpg" alt="Photo of hotel 1" class="gallery__photo">
+                    <figure class="item">
+                        <img src="img/hotel-1.jpg" alt="Photo of hotel 1" class="item__photo">
+
+                        <div class="item__caption">
+                            <h4>Portugal</h4>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, est.</p>
+                        </div>
+                    </figure>
+                    <figure class="item">
+                        <img src="img/hotel-2.jpg" alt="Photo of hotel 2" class="item__photo">
+
+                        <div class="item__caption">
+                            <h4>Spain</h4>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, est.</p>
+                        </div>
                     </figure>
 
-                    <figure class="gallery__item">
-                        <img src="img/hotel-2.jpg" alt="Photo of hotel 2" class="gallery__photo">
+                    <figure class="item">
+                        <img src="img/hotel-3.jpg" alt="Photo of hotel 3" class="item__photo">
+
+                        <div class="item__caption">
+                            <h4>Greece</h4>
+                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, est.</p>
+                        </div>
                     </figure>
 
-                    <figure class="gallery__item">
-                        <img src="img/hotel-3.jpg" alt="Photo of hotel 3" class="gallery__photo">
-                    </figure>
+                    
                 </div>
 
                 <div class="overview">
@@ -222,7 +265,7 @@
                                 </div>
                             </figcaption>
                         </figure>
-                    
+
                         <figure class="review">
                             <blockquote class="review__text">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga doloremque architecto

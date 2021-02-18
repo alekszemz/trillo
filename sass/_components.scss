@@ -76,6 +76,17 @@
 
   align-self: stretch;
 
+  &__user-name:hover::before {
+    content: "User profile";
+    position: absolute;
+    font-size: 1.5rem;
+    margin-top: -2rem;
+    padding: 1rem;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 1rem;
+  }
+
   & > * {
     padding: 0 2rem;
     cursor: pointer;
@@ -99,6 +110,7 @@
     fill: var(--color-grey-dark-2);
   }
 
+  // When someone clicks an icon, I want to chat box to appear, slow.
   &__notification {
     font-size: 0.8rem;
     height: 1.75rem;
@@ -113,6 +125,84 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &:hover + .chat-box {
+      opacity: 1;
+      z-index: 9999;
+    }
+  }
+
+  .chat-box {
+    opacity: 0;
+    position: absolute;
+    width: 22rem;
+    height: 30rem;
+    top: 3rem;
+    border: 2px solid #000;
+    border-radius: 1rem;
+    margin-left: -15.5rem;
+    display: flex;
+    align-items: center;
+    z-index: -2;
+
+    box-shadow: var(--shadow-dark);
+
+    clip-path: polygon(
+      0 30%,
+      40% 30%,
+      80% 0,
+      75% 30%,
+      100% 30%,
+      100% 100%,
+      0 100%
+    );
+    background-color: var(--color-primary);
+    transition: all 2s ease-in;
+
+    .phrazes {
+      padding: 1rem;
+      margin-top: 10rem;
+      list-style: none;
+
+      .phraze-one {
+        width: 15rem;
+        padding: 0.5rem;
+        background-color: yellow;
+        color: #000;
+        border: 1px solid #000;
+        border-radius: 1rem;
+      }
+
+      .phraze-two {
+        width: 15rem;
+        padding: 0.5rem;
+        background-color: skyblue;
+        color: #fff;
+        border: 1px solid #000;
+        border-radius: 1rem;
+        justify-content: end;
+        margin: 1rem 0 1rem 5rem;
+      }
+
+      .phraze-three {
+        width: 15rem;
+        padding: 0.5rem;
+        background-color: yellow;
+        color: #000;
+        border: 1px solid #000;
+        border-radius: 1rem;
+      }
+
+      .phraze-four {
+        width: 15rem;
+        padding: 0.5rem;
+        background-color: skyblue;
+        color: #fff;
+        border: 1px solid #000;
+        border-radius: 1rem;
+        margin: 1rem 0 1rem 5rem;
+      }
+    }
   }
 
   &__user-photo {
@@ -129,6 +219,11 @@
   list-style: none;
   margin-top: 3.5rem;
 
+  @media only screen and (max-width: $bp-mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+
   @media only screen and (max-width: $bp-medium) {
     display: flex;
     margin: 0;
@@ -143,6 +238,10 @@
       @media only screen and (max-width: $bp-medium) {
         margin: 0;
       }
+    }
+
+    @media only screen and (max-width: $bp-mobile) {
+      font-size: 1rem;
     }
 
     @media only screen and (max-width: $bp-medium) {
@@ -230,9 +329,37 @@
 .gallery {
   display: flex;
 
-  &__photo {
-    width: 100%;
-    display: block;
+  .item {
+    perspective: 8rem;
+    -webkit-perspective: 8rem;
+
+    &__photo {
+      width: 100%;
+      display: block;
+      position: relative;
+    }
+
+    &__caption {
+      background-color: var(--color-primary);
+      height: 8rem;
+      width: auto;
+      font-size: 1rem;
+      color: #fff;
+      padding-left: 10px;
+      padding-top: 15px;
+      transform-style: preserve-3d;
+      transform: rotateX(-180deg);
+      transform-origin: top;
+      z-index: -1;
+      position: relative;
+      transition: 1s;
+      backface-visibility: hidden;
+    }
+  }
+
+  .item:hover .item__caption {
+    transform: rotateX(0deg);
+    z-index: 1;
   }
 }
 
@@ -243,12 +370,22 @@
   align-items: center;
   border-bottom: var(--line);
 
+  @media only screen and (max-width: $bp-mobile) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   &__heading {
     font-size: 2.25rem;
     font-weight: 300;
     text-transform: uppercase;
     letter-spacing: 1px;
     padding: 1.5rem 3rem;
+
+    @media only screen and (max-width: $bp-mobile) {
+      width: 100%;
+      text-align: center;
+    }
 
     @media only screen and (max-width: $bp-small) {
       font-size: 1.8rem;
@@ -259,6 +396,10 @@
   &__stars {
     margin-right: auto;
     display: flex;
+
+    @media only screen and (max-width: $bp-mobile) {
+      margin: 0 2.2rem 0 1.5rem;
+    }
   }
 
   &__icon-star,
@@ -310,7 +451,7 @@
     text-transform: uppercase;
 
     @media only screen and (max-width: $bp-small) {
-      font-size: .5rem;
+      font-size: 0.5rem;
     }
   }
 }
@@ -382,6 +523,10 @@
   display: flex;
   flex-wrap: wrap;
 
+  @media only screen and (max-width: $bp-mobile) {
+    flex-direction: column;
+  }
+
   &__item {
     flex: 0 0 50%;
     margin-bottom: 0.7rem;
@@ -395,15 +540,18 @@
     margin-right: 0.7rem;
 
     // For older browsers
-    // background-image: url(../img/chevron-thin-right.svg);
-    // background-size: cover;
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover;
 
     // For newer browser using - masks
-    background-color: var(--color-primary);
-    -webkit-mask-image: url(../img/chevron-thin-right.svg);
-    mask-image: url(../img/chevron-thin-right.svg);
-    -webkit-mask-size: cover;
-    mask-size: cover;
+    @supports (-webkit-mask-image: url()) or (mask-image: url()) {
+      background-color: var(--color-primary);
+      -webkit-mask-image: url(../img/chevron-thin-right.svg);
+      mask-image: url(../img/chevron-thin-right.svg);
+      -webkit-mask-size: cover;
+      mask-size: cover;
+      background-image: none;
+    }
   }
 }
 
